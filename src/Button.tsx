@@ -4,6 +4,10 @@
 export function Button () {
 
     return (
-        <button>clique aqui</button>
+        <>
+            <h2>Esse botão pode ser alterado</h2>
+            <button>clique aqui</button>
+        </>
+
     )
 }
