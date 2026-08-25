@@ -2,6 +2,7 @@ import { useState } from "react"
 import { ProductCard } from "./components/ProductCard"
 import type { Product } from "./types/product"
 import type { CartItem } from "./types/cartitem"
+import { ProductList } from "./components/ProductList"
 
 interface AppProps {
   products: Product[]
@@ -9,45 +10,49 @@ interface AppProps {
 
 function App(props: AppProps) {
 
-  const [cartItem, setCartItem] = useState <CartItem[]>([])
+  const [cartItem, setCartItem] = useState<CartItem[]>([])
 
-  function handleAddToCart(product: Product):void {
+  function handleAddCartItem(product: Product): void {
 
-    const exists = props.products.find((item) => {
-      return item.id === product.id
-    })
+    const list = [...cartItem]
 
-    console.log (exists)
+    const exists = list.find((value) => value.product.id === product.id)
 
     if (exists) {
-
-      const cartItem: CartItem = {
-        product: exists,
-        quantity: 1
+      const item: CartItem = {
+        product: exists.product,
+        quantity: exists.quantity + 1
       }
-      
-      setCartItem([cartItem])
+      list.push(item)
+      setCartItem(list)
+      return
     }
 
-    console.log (cartItem)
-
+    const item: CartItem = {
+      product: product,
+      quantity: 1
+    }
+    list.push(item)
+    setCartItem(list)
   }
-
 
   return (
     <main>
 
       <h1>NexStore</h1>
 
+      <h2>Itens para comprar</h2>
 
-      {
-        props.products.map((value) => {
-          return <ProductCard product={value} onAddCart={handleAddToCart}/>
+      <div>
+        {cartItem.map((item) => {
+          return <p>{item.product.title} valor: R${item.product.price}</p>
+        })}
+      </div>
 
-        })
-      
-      }
-
+      <ProductList
+        products={props.products}
+        onAddToCart={handleAddCartItem}
+      />
 
     </main>
   )
