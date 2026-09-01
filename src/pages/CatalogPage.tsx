@@ -14,7 +14,7 @@ export function CatalogPage() {
 
     const filtered = products.filter((product) =>{
 
-        return (category === 'all' || product.category === category) 
+        return (category === 'all' || product.category === category)
         && 
         product.title.toLowerCase().includes(query.toLocaleLowerCase())
 
