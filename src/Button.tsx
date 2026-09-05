@@ -1,9 +1,18 @@
 // tsx => typescript + xhtml
 // jsx => javascript + xhtml
 
-export function Button () {
+interface ButtonProps {
+    text: string
+}
+
+export function Button (props: ButtonProps) {
 
     return (
-        <button>clique aqui</button>
+        <>
+            <h2>Esse botão pode ser alterado</h2>
+
+            <button>{props.text}</button>
+        </>
+
     )
 }
