@@ -8,16 +8,21 @@ export function CatalogPage() {
     const [cartItem, setCartItem] = useState<CartItem[]>([])
     const [query, setQuery] = useState('')
     const [category, setCategory] = useState ('all')
-    const {products, loading} = useProducts()
-
-    const categories = ['all', ...new Set(products.map((product) => product.category))]
+    const [minValue, setMinValue] = useState(0)
+    const [maxValue, setMaxValue] = useState(0)
+    const {products, loading, categories} = useProducts()
 
     const filtered = products.filter((product) =>{
 
-        return (category === 'all' || product.category === category)
-        && 
-        product.title.toLowerCase().includes(query.toLocaleLowerCase())
+        const searchCategory = category === 'all' || product.category === category
+        const searchWords = product.title.toLowerCase().includes(query.toLocaleLowerCase())
 
+        const max = maxValue === 0 || product.price <= maxValue;
+        const min = minValue === 0 || product.price >= minValue;
+
+        console.log(max)
+
+        return searchCategory && searchWords && max && min
     })
     
 function handleAddCartItem(product: Product): void {
@@ -53,19 +58,34 @@ function handleAddCartItem(product: Product): void {
                 onChange={(event) => setQuery(event.target.value)}
 
             />
-                <select 
+            <select 
                 name="category-list" 
                 id="category"
                 value={category}
                 onChange={(event) => setCategory(event.target.value)}
-                >
-                    {
-                        categories.map((item) =>{
-                            return <option value={item}>{item}</option>
-                        })
-                    }
+            >
+                {
+                    categories.map((item) =>{
+                        return <option value={item}>{item}</option>
+                    })
+                }
 
-                </select>
+            </select>
+
+            <input
+                type="number"
+                placeholder="Valor minimo"
+                value={minValue}
+                onChange={(event) => setMinValue(event.target.valueAsNumber ? event.target.valueAsNumber : 0)}
+            />
+
+            <input
+                type="number"
+                placeholder="Valor máximo"
+                value={maxValue}
+                onChange={(event) => setMaxValue(event.target.valueAsNumber ? event.target.valueAsNumber : 0)}
+            />
+            
             {
                 loading ? 
                 <p>Carregando itens...</p> :
