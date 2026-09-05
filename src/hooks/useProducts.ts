@@ -4,6 +4,7 @@ import { getProducts } from "../services/products";
 
 interface useProductsResult {
     products: Product[]
+    categories: string[]
     loading: boolean
 }
 
@@ -19,8 +20,10 @@ export function useProducts(): useProductsResult {
 
     }, [])
 
+    const categories = ['all', ...new Set (products.map((product) => product.category))]
+
     return {
-        products, loading
+        products, loading, categories
     }
 
 }
