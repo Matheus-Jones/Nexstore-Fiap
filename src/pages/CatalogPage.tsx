@@ -3,6 +3,7 @@ import type { Product } from "../types/product";
 import { ProductList } from "../components/ProductList";
 import type { CartItem } from "../types/cartitem";
 import { useProducts } from "../hooks/useProducts";
+import { Link } from "react-router-dom";
 
 export function CatalogPage() {
     const [cartItem, setCartItem] = useState<CartItem[]>([])
@@ -50,6 +51,8 @@ function handleAddCartItem(product: Product): void {
 
     return (        
         <section>
+
+            <Link to="/cart">Item disponivel</Link>
             
             <input 
                 type="text" 
