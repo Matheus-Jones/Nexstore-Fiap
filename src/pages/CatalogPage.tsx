@@ -4,6 +4,7 @@ import { ProductList } from "../components/ProductList";
 import type { CartItem } from "../types/cartitem";
 import { useProducts } from "../hooks/useProducts";
 import { Link } from "react-router-dom";
+import { Search } from "lucide-react";
 
 export function CatalogPage() {
     const [cartItem, setCartItem] = useState<CartItem[]>([])
@@ -50,44 +51,61 @@ function handleAddCartItem(product: Product): void {
   }
 
     return (        
-        <section>
+        <section className="mb-5 flex flex-wrap items-end justify-between gap-3">
 
-            <Link to="/cart">Item disponivel</Link>
-            
-            <input 
-                type="text" 
-                placeholder="Buscar produto..."
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
+            <div>
+                <h1 className="font-display text-2xl font-bold">Catálogo</h1>
 
-            />
-            <select 
-                name="category-list" 
-                id="category"
-                value={category}
-                onChange={(event) => setCategory(event.target.value)}
-            >
-                {
-                    categories.map((item) =>{
-                        return <option value={item}>{item}</option>
-                    })
-                }
+                <p className="text-sm text-neutral-500">
+                    {loading ? "Carregando produtos..." : `${filtered.length} produtos disponíveis`}
+                </p>
+            </div>
 
-            </select>
+            <div className="flex flex-wrap items-center gap-2">
 
-            <input
-                type="number"
-                placeholder="Valor minimo"
-                value={minValue}
-                onChange={(event) => setMinValue(event.target.valueAsNumber ? event.target.valueAsNumber : 0)}
-            />
+                <div className="relative">
+                    <Search size={15} className="absolute left-2.5 top-2.5 text-neutral-400"/>
+                    <input
+                        type="text"
+                        placeholder="Buscar produto..."
+                        value={query}
+                        onChange={(event) => setQuery(event.target.value)}
+                        className="field pl-8"
+                    />
+                </div>
 
-            <input
-                type="number"
-                placeholder="Valor máximo"
-                value={maxValue}
-                onChange={(event) => setMaxValue(event.target.valueAsNumber ? event.target.valueAsNumber : 0)}
-            />
+                <select
+                    name="category-list"
+                    id="category"
+                    value={category}
+                    onChange={(event) => setCategory(event.target.value)}
+                    className="field"
+                >
+                    {
+                        categories.map((item) => {
+                            return <option value={item}>{item}</option>
+                        })
+                    }
+
+                </select>
+
+                <input
+                    type="number"
+                    placeholder="Valor minimo"
+                    value={minValue}
+                    onChange={(event) => setMinValue(event.target.valueAsNumber ? event.target.valueAsNumber : 0)}
+                    className="field"
+                />
+
+                <input
+                    type="number"
+                    placeholder="Valor máximo"
+                    value={maxValue}
+                    onChange={(event) => setMaxValue(event.target.valueAsNumber ? event.target.valueAsNumber : 0)}
+                    className="field"
+                />
+
+            </div>
             
             {
                 loading ? 
@@ -98,6 +116,8 @@ function handleAddCartItem(product: Product): void {
                     onAddToCart={handleAddCartItem}
                 />
             }
+
+    
         </section>
     )
 
