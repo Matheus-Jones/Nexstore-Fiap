@@ -20,7 +20,7 @@ export function MainLayout () {
                 <Outlet/>
             </main>
 
-            <footer>Nexstore = Projeto Academico</footer>
+            <footer>Nexstore - Projeto Academico</footer>
 
         </div>
 

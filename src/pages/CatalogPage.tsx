@@ -52,7 +52,7 @@ function handleAddCartItem(product: Product): void {
     return (        
         <section>
 
-            <Link to="/cart">Item disponivel</Link>
+            <Link to="/cart">Itens disponiveis</Link>
             
             <input 
                 type="text" 
