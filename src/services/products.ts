@@ -1,8 +1,9 @@
 import type { Product } from "../types/product";
 
-export function getProducts():Promise<Product[]> {
+const API = 'https://fakestoreapi.com'
 
-    const response = fetch('https://fakestoreapi.com/products')
+export function getProducts(): Promise<Product[]> {
+    const response = fetch(`${API}/products`)
         .then((data) => {
             return data.json()
         })
