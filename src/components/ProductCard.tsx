@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import type { Product } from "../types/product"
 import { formatPrice } from "../utils/formatPrice"
 
@@ -10,6 +11,8 @@ export function ProductCard({ product, onAddCart }: ProductCardProps) {
 
     return (
         <section className="card flex flex-col p-3 transition group hover:border-indigo-300 hover:shadow-md">
+            
+        <Link to={`/product/${product.id}`} className="flex-1">
 
             <div className="mb-3 flex h-32 items-center justify-center overflow-hidden rounded-lg bg-stone-50">
                 <img className="h-full object-contain transition group-hover:scale-105" src={product.image} alt={product.title} />
@@ -23,7 +26,8 @@ export function ProductCard({ product, onAddCart }: ProductCardProps) {
                 <button className="btn-primary px-3 py-1 text-xs" onClick={() => onAddCart(product)}>Adicionar ao carrinho</button>
             </div>
 
-
+        </Link>
+        
         </section>
     )
 }
