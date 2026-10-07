@@ -15,7 +15,7 @@ function App() {
   function handleAddCartItem(product: Product): void {
 
     const list = [...cartItem]
-    
+
     const exists = list.find((value) => value.product.id === product.id)
 
     if (exists) {
