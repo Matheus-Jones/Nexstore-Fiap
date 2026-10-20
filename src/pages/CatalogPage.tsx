@@ -3,7 +3,6 @@ import type { Product } from "../types/product";
 import { ProductList } from "../components/ProductList";
 import { useProducts } from "../hooks/useProducts";
 import { Search } from "lucide-react";
-import type { ProductCardSkeleton } from "../components/ProductCardSkeleton";
 import { ProductGridSkeleton } from "../components/ProductGridSkeleton";
 
 interface CatalogPageProps {
